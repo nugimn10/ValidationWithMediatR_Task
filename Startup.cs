@@ -43,18 +43,18 @@ namespace ValidationWithMediatr_task
                     .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<ProductValidator>())
                     .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<MerchantValidator>());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidator<,>));
-            services.AddAuthentication( options => {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(option => {
-                option.RequireHttpsMetadata = false;
-                option.TokenValidationParameters = new TokenValidationParameters{
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("ini secret key nya harus panjang")),
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                };
-            });
+            // services.AddAuthentication( options => {
+            //     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            // }).AddJwtBearer(option => {
+            //     option.RequireHttpsMetadata = false;
+            //     option.TokenValidationParameters = new TokenValidationParameters{
+            //         ValidateIssuerSigningKey = true,
+            //         IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("ini secret key nya harus panjang")),
+            //         ValidateIssuer = false,
+            //         ValidateAudience = false,
+            //     };
+            // });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
