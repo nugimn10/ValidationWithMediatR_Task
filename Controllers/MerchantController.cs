@@ -2,12 +2,13 @@ using Microsoft.AspNetCore.Mvc;
 using ValidationWithMediatr_task.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Linq;
+using System;
 
 namespace ValidationWithMediatr_task.Controllers
 {
     [ApiController]
     [Route("merch")]
-    [Authorize]
+    // [Authorize]
     public class MerchantController : ControllerBase
     {
         private readonly dbContext _context;
@@ -17,43 +18,68 @@ namespace ValidationWithMediatr_task.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetMerchant()
+        public IActionResult Get()
         {
-            var pa = _context.Merchants;
-            return Ok(new {message = "success retrieve data", status = true, data = pa});
+            var merchant = _context.Merchants;
+
+            return Ok(new
+            {
+                message = "success retrieve data",
+                status = true,
+                data = merchant
+            });
+        }
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var merchant = _context.Merchants.First(i => i.Id == id);
+
+            return Ok(new
+            {
+                message = "success retrieve data",
+                status = true,
+                data = merchant
+            });
         }
 
-        [HttpPost]
-        public IActionResult PostMerchant(Merchant merchant)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
-            _context.Merchants.Add(merchant);
+            var merchant = _context.Merchants.First(i => i.Id == id);
+
+            _context.Merchants.Remove(merchant);
             _context.SaveChanges();
             return Ok(merchant);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            var pa = _context.Merchants.First(i => i.Id == id);
-            return Ok(pa);
-        }
-
         [HttpPut("{id}")]
-        public IActionResult UpdatMerchant(int id)
+        public IActionResult Put(int id, RequestData<Merchant> merput)
         {
-            var pa = _context.Merchants.First(i => i.Id == id);
-            pa.name = "Buruk Rupa";
+            var mer = _context.Merchants.First(i => i.Id == id);
+
+            mer.name = merput.data.attributes.name;
+            mer.image = merput.data.attributes.image;
+            mer.address = merput.data.attributes.address;
+            mer.rating = merput.data.attributes.rating;
+            mer.created_at = merput.data.attributes.created_at;
+            mer.update_at = DateTime.Now;
+
+            _context.Merchants.Update(mer);
             _context.SaveChanges();
-            return Ok(pa);
+            return Ok(mer);
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult DelMerchant(int id)
+        [HttpPost]
+        public IActionResult Post(RequestData<Merchant> merchant)
         {
-            var pa = _context.Merchants.First(i => i.Id == id);
-            _context.Merchants.Remove(pa);
+            _context.Merchants.Add(merchant.data.attributes);
             _context.SaveChanges();
-            return Ok(pa);
+            return Ok(new
+            {
+                message = "success retrieve data",
+                status = true,
+                data = merchant
+            });
         }
     }
 }
