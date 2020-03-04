@@ -11,7 +11,7 @@ namespace ValidationWithMediatr_task.Models
         public int id { get; set; }
         public string fullname { get; set; }
         public string username { get; set; }
-        public DateTime birthdate { get; set; }
+        public DateTime MyProperty { get; set; }
         public string passowrd { get; set; }
         public Gender gender { get; set; }
         public string email { get; set; }

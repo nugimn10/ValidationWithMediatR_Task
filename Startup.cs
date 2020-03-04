@@ -35,26 +35,29 @@ namespace ValidationWithMediatr_task
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<dbContext>(options => options.UseNpgsql("Host=localhost;Database=dbtokosederhana;Username=postgres;Password=docker"));
+            services.AddDbContext<dbContext>(op => op.UseNpgsql("Host=127.0.0.1;Username=postgres;Password=docker;Database=dbtokosederhana"));
             services.AddControllers();
             services.AddMvc()
-                    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CustomerValidator>())
-                    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CustomerpayValidator>())
-                    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<ProductValidator>())
-                    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<MerchantValidator>());
+                    .AddFluentValidation();
+            
+            services.AddTransient<IValidator<Customer>, CustomerValidator>();
+            services.AddTransient<IValidator<Product>, ProductValidator>();
+            services.AddTransient<IValidator<Customer_Payment_Card>, CustomerpayValidator>();
+            services.AddTransient<IValidator<Merchant>, MerchantValidator>();
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidator<,>));
-            // services.AddAuthentication( options => {
-            //     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            // }).AddJwtBearer(option => {
-            //     option.RequireHttpsMetadata = false;
-            //     option.TokenValidationParameters = new TokenValidationParameters{
-            //         ValidateIssuerSigningKey = true,
-            //         IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("ini secret key nya harus panjang")),
-            //         ValidateIssuer = false,
-            //         ValidateAudience = false,
-            //     };
-            // });
+
+            services.AddAuthentication( options => {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(option => {
+                option.RequireHttpsMetadata = false;
+                option.TokenValidationParameters = new TokenValidationParameters{
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("ini secret key nya harus panjang")),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,7 +68,7 @@ namespace ValidationWithMediatr_task
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
 
