@@ -12,7 +12,7 @@ namespace ValidationWithMediatr_task.Validator
         {
             RuleFor(x => x.name).NotEmpty().WithMessage("name Cant Be Empty");
             RuleFor(x => x.address).NotEmpty().WithMessage("address Cant Be Empty");
-            RuleFor(x => x.rating).ExclusiveBetween(1,5).WithMessage("price Cant Be Empty");
+            RuleFor(x => x.rating).InclusiveBetween(1,5).WithMessage("price Cant Be Empty");
         }
     }
 }

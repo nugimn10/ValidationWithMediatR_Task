@@ -71,6 +71,8 @@ namespace ValidationWithMediatr_task
             // app.UseHttpsRedirection();
 
             app.UseRouting();
+            
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

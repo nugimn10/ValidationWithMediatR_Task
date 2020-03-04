@@ -16,8 +16,8 @@ namespace ValidationWithMediatr_task.Validator
             RuleFor(x => x.email).EmailAddress().WithMessage("Email is not valid email address");
             RuleFor(x => x.gender).IsInEnum<Customer, Gender>().WithMessage("gender is one of male or female");
             RuleFor(x => x.gender).NotEmpty().WithMessage("gender cant be empty");
-            RuleFor(x => x.MyProperty).NotEmpty().WithMessage("birthday cant be empty");
-            RuleFor(x => DateTime.Now.Year - x.MyProperty.Year).GreaterThanOrEqualTo(18).WithMessage("age must be greater than 18");
+            RuleFor(x => x.birthdate).NotEmpty().WithMessage("birthday cant be empty");
+            RuleFor(x => DateTime.Now.Year - x.birthdate.Year).GreaterThanOrEqualTo(18).WithMessage("age must be greater than 18");
         }
     }
 

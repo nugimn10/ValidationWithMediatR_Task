@@ -12,6 +12,8 @@ namespace ValidationWithMediatr_task.Models
         public string credit_card_number { get; set; }
         public DateTime created_at { get; set; } = DateTime.Now;
         public DateTime updated_at { get; set; } = DateTime.Now;
+
+        public Customer customer {get; set;}
     }
 
 }
