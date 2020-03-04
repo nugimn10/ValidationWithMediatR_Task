@@ -2,7 +2,7 @@ using System;
 using System.Data;
 using System.Security.Cryptography.X509Certificates;
 using FluentValidation;
-using ValidationWithMediatr_task.Models;
+using ValidationWithMediatr_task.Domain.Models;
 
 namespace ValidationWithMediatr_task.Validator
 {

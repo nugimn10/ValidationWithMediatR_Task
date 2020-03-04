@@ -2,16 +2,18 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using ValidationWithMediatr_task.Models;
+using ValidationWithMediatr_task.Domain.Models;
 
-namespace ValidationWithMediatr_task.Migrations
+namespace ValidationWithMediatr_task.Infrastructure.Migrations
 {
     [DbContext(typeof(dbContext))]
-    partial class dbContextModelSnapshot : ModelSnapshot
+    [Migration("20200303085229_initialCreate")]
+    partial class initialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,7 +28,7 @@ namespace ValidationWithMediatr_task.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<DateTime>("birthdate")
+                    b.Property<DateTime>("MyProperty")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("created_at")
@@ -91,8 +93,6 @@ namespace ValidationWithMediatr_task.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("customer_id");
-
                     b.ToTable("Customer_Payment_Cards");
                 });
 
@@ -150,27 +150,7 @@ namespace ValidationWithMediatr_task.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("merchant_id");
-
                     b.ToTable("Product");
-                });
-
-            modelBuilder.Entity("ValidationWithMediatr_task.Models.Customer_Payment_Card", b =>
-                {
-                    b.HasOne("ValidationWithMediatr_task.Models.Customer", "customer")
-                        .WithMany()
-                        .HasForeignKey("customer_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ValidationWithMediatr_task.Models.Product", b =>
-                {
-                    b.HasOne("ValidationWithMediatr_task.Models.Merchant", "merchant")
-                        .WithMany()
-                        .HasForeignKey("merchant_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

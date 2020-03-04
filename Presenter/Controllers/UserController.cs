@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using ValidationWithMediatr_task.Models;
+using ValidationWithMediatr_task.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
-namespace ValidationWithMediatr_task.Controllers
+namespace ValidationWithMediatr_task.Presenter.Controllers
 {
     [ApiController]
     [Route("authenticate")]

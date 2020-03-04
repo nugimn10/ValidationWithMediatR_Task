@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ValidationWithMediatr_task.Migrations
+namespace ValidationWithMediatr_task.Infrastructure.Migrations
 {
     public partial class newInitialCreates : Migration
     {

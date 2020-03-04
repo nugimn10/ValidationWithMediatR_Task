@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
-using ValidationWithMediatr_task.Models;
+using ValidationWithMediatr_task.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Linq;
 using System;
 
-namespace ValidationWithMediatr_task.Controllers
+namespace ValidationWithMediatr_task.Presenter.Controllers
 {
     [ApiController]
     [Route("customer")]

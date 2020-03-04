@@ -2,7 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 
-namespace ValidationWithMediatr_task.Models
+namespace ValidationWithMediatr_task.Domain.Models
 {
     public class dbContext : DbContext
     {

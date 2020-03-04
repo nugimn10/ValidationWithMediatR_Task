@@ -1,5 +1,5 @@
 using System;
-namespace ValidationWithMediatr_task.Models
+namespace ValidationWithMediatr_task.Domain.Models
 {  
     public class Product
     {

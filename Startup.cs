@@ -12,7 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
-using ValidationWithMediatr_task.Models;
+using ValidationWithMediatr_task.Domain.Models;
 using FluentValidation.AspNetCore;
 using FluentValidation;
 using ValidationWithMediatr_task.Validator;
