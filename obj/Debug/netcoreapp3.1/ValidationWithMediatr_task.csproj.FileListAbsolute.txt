@@ -56,3 +56,10 @@ C:\Users\Nugi\ValidationWithMediatR_Task-implement-CQRS\obj\Debug\netcoreapp3.1\
 C:\Users\Nugi\ValidationWithMediatR_Task-implement-CQRS\obj\Debug\netcoreapp3.1\ValidationWithMediatr_task.AssemblyInfo.cs
 C:\Users\Nugi\ValidationWithMediatR_Task-implement-CQRS\obj\Debug\netcoreapp3.1\ValidationWithMediatr_task.dll
 C:\Users\Nugi\ValidationWithMediatR_Task-implement-CQRS\obj\Debug\netcoreapp3.1\ValidationWithMediatr_task.pdb
+C:\Users\Nugi\ValidationWIthMetiatR\ValidationWithMediatR_Task\obj\Debug\netcoreapp3.1\ValidationWithMediatr_task.csprojAssemblyReference.cache
+C:\Users\Nugi\ValidationWIthMetiatR\ValidationWithMediatR_Task\obj\Debug\netcoreapp3.1\ValidationWithMediatr_task.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Nugi\ValidationWIthMetiatR\ValidationWithMediatR_Task\obj\Debug\netcoreapp3.1\ValidationWithMediatr_task.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Nugi\ValidationWIthMetiatR\ValidationWithMediatR_Task\obj\Debug\netcoreapp3.1\ValidationWithMediatr_task.AssemblyInfoInputs.cache
+C:\Users\Nugi\ValidationWIthMetiatR\ValidationWithMediatR_Task\obj\Debug\netcoreapp3.1\ValidationWithMediatr_task.AssemblyInfo.cs
+C:\Users\Nugi\ValidationWIthMetiatR\ValidationWithMediatR_Task\obj\Debug\netcoreapp3.1\ValidationWithMediatr_task.dll
+C:\Users\Nugi\ValidationWIthMetiatR\ValidationWithMediatR_Task\obj\Debug\netcoreapp3.1\ValidationWithMediatr_task.pdb

@@ -6,7 +6,7 @@ namespace ValidationWithMediatr_task.Application.UseCases.Customer.Models
         Pria = 1,
         Wanita = 0
     }
-    public class Customer
+    public class CustomerData
     {
         public int id { get; set; }
         public string fullname { get; set; }

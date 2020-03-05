@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nugi\\ValidationWithMediatR_Task-implement-CQRS\\ValidationWithMediatr_task.csproj": {}
+    "C:\\Users\\Nugi\\ValidationWIthMetiatR\\ValidationWithMediatR_Task\\ValidationWithMediatr_task.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nugi\\ValidationWithMediatR_Task-implement-CQRS\\ValidationWithMediatr_task.csproj": {
+    "C:\\Users\\Nugi\\ValidationWIthMetiatR\\ValidationWithMediatR_Task\\ValidationWithMediatr_task.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nugi\\ValidationWithMediatR_Task-implement-CQRS\\ValidationWithMediatr_task.csproj",
+        "projectUniqueName": "C:\\Users\\Nugi\\ValidationWIthMetiatR\\ValidationWithMediatR_Task\\ValidationWithMediatr_task.csproj",
         "projectName": "ValidationWithMediatr_task",
-        "projectPath": "C:\\Users\\Nugi\\ValidationWithMediatR_Task-implement-CQRS\\ValidationWithMediatr_task.csproj",
+        "projectPath": "C:\\Users\\Nugi\\ValidationWIthMetiatR\\ValidationWithMediatR_Task\\ValidationWithMediatr_task.csproj",
         "packagesPath": "C:\\Users\\Nugi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nugi\\ValidationWithMediatR_Task-implement-CQRS\\obj\\",
+        "outputPath": "C:\\Users\\Nugi\\ValidationWIthMetiatR\\ValidationWithMediatR_Task\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Nugi\\AppData\\Roaming\\NuGet\\NuGet.Config",
