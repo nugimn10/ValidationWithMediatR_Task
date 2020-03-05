@@ -2,7 +2,7 @@ using MediatR;
 using System;
 using ValidationWithMediatr_task.Domain.Models;
 
-namespace ValidationWithMediatr_task.Application.UseCases.Customer.Command.CreateCreator
+namespace ValidationWithMediatr_task.Application.UseCases.Customer.Command.CreateCustomer
 {
     public class CreateCustomerCommand : IRequest<CreateCustomerCommandDto>
     {

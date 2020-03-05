@@ -4,7 +4,7 @@ using System.Security.Cryptography.X509Certificates;
 using FluentValidation;
 using ValidationWithMediatr_task.Domain.Models;
 
-namespace ValidationWithMediatr_task.Application.UseCases.Customer.Command.CreateCreator
+namespace ValidationWithMediatr_task.Application.UseCases.Customer.Command.CreateCustomer
 {
     public class CreateCustomerCommandValidator : AbstractValidator<CreateCustomerCommand>
     {
@@ -20,6 +20,5 @@ namespace ValidationWithMediatr_task.Application.UseCases.Customer.Command.Creat
             RuleFor(x => DateTime.Now.Year - x.Data.birthdate.Year).GreaterThanOrEqualTo(18).WithMessage("age must be greater than 18");
         }
     }
-
 
 }

@@ -1,8 +1,15 @@
-using Microsoft.AspNetCore.Mvc;
-using ValidationWithMediatr_task.Domain.Models;
-using Microsoft.AspNetCore.Authorization;
-using System.Linq;
+  
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using ValidationWithMediatr_task.Application.UseCases.Customer.Queries.GetCustomer;
+using ValidationWithMediatr_task.Application.UseCases.Customer.Queries.GetCustomers;
+using ValidationWithMediatr_task.Application.UseCases.Customer.Command.CreateCustomer;
 using ValidationWithMediatr_task.Infrastructure.Presistence;
 
 namespace ValidationWithMediatr_task.Presenter.Controllers
@@ -11,77 +18,42 @@ namespace ValidationWithMediatr_task.Presenter.Controllers
     [Route("customer")]
     public class CustomerController : ControllerBase
     {
-        private readonly dbContext _context;
-        public CustomerController(dbContext context)
+        private IMediator _mediatr;
+        protected IMediator Mediator => _mediatr ?? (_mediatr = HttpContext.RequestServices.GetService<IMediator>());
+
+        public CustomerController()
         {
-            _context = context;
+
         }
 
         [HttpGet]
-        public IActionResult GetCustomer()
+        public async Task<ActionResult<GetCustomersDto>> GetCustomer()
         {
-            var cu = _context.Customer;
-            return Ok(new 
-            {
-                message = "success retrieve data", 
-                status = true, 
-                data = cu
-            });
+            return Ok(await Mediator.Send(new GetCustomerQuery(){})  );
         }
 
         [HttpPost]
-        public IActionResult PostCustomer(RequestData<Customer> customer)
+        public async Task<ActionResult<GetCustomerDto>> PostCustomer([FromBody] CreateCustomerCommand payload)
         {
-            _context.Customer.Add(customer.data.attributes);
-            _context.SaveChanges();
-            return Ok(new 
-            {
-                message = "success retrieve data", 
-                status = true, 
-                data = customer
-            });
+            return Ok(await Mediator.Send(payload)) ;
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetCustomerById(int id)
+        public async Task<ActionResult<GetCustomersDto>> GetCustomerById(int id)
         {
-            var customer = _context.Customer.First(i => i.id == id);
-            return Ok(new 
-            {
-                message = "success retrieve data", 
-                status = true, 
-                data = customer
-            });
+            return Ok(await Mediator.Send(new GetCustomerQuery(){id = id})  );
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, RequestData<Customer> customerput)
+        public async Task<ActionResult<GetCustomerDto>> Put(int id, [FromBody] string value)
         {
-            var customer = _context.Customer.First(i => i.id == id);
-
-            customer.fullname = customerput.data.attributes.fullname;
-            customer.username = customerput.data.attributes.username;
-            customer.birthdate = customerput.data.attributes.birthdate;
-            customer.passowrd = customerput.data.attributes.passowrd;
-            customer.gender = customerput.data.attributes.gender;
-            customer.email = customerput.data.attributes.email;
-            customer.phoneNumber = customerput.data.attributes.phoneNumber;
-            customer.created_at = customerput.data.attributes.created_at;
-            customer.updated_at = DateTime.Now;
-
-            _context.Customer.Update(customer);
-            _context.SaveChanges();
-            return Ok(customer);
+            return Ok();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteCustomer(int id)
+        public async Task<ActionResult<GetCustomerDto>> Delete([FromBody] CreateCustomerCommand payload)
         {
-            var customer = _context.Customer.First(i => i.id == id);
-
-            _context.Customer.Remove(customer);
-            _context.SaveChanges();
-            return Ok(customer);
+            return Ok();
         }
     }
 }

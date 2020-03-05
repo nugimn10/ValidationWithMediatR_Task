@@ -6,7 +6,7 @@ using ValidationWithMediatr_task.Infrastructure.Presistence;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
 
-namespace ValidationWithMediatr_task.Application.UseCases.Customer.Command.CreateCreator
+namespace ValidationWithMediatr_task.Application.UseCases.Customer.Command.CreateCustomer
 {
     public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, CreateCustomerCommandDto>
     {
