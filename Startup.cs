@@ -20,6 +20,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using ValidationWithMediatr_task.Infrastructure.Presistence;
 
 namespace ValidationWithMediatr_task
 {

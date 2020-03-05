@@ -49,3 +49,10 @@
 /Users/user/ValidationWithMediatr_task/bin/Debug/netcoreapp3.1/Microsoft.IdentityModel.Tokens.dll
 /Users/user/ValidationWithMediatr_task/bin/Debug/netcoreapp3.1/Newtonsoft.Json.dll
 /Users/user/ValidationWithMediatr_task/bin/Debug/netcoreapp3.1/System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Nugi\ValidationWithMediatR_Task-implement-CQRS\obj\Debug\netcoreapp3.1\ValidationWithMediatr_task.csprojAssemblyReference.cache
+C:\Users\Nugi\ValidationWithMediatR_Task-implement-CQRS\obj\Debug\netcoreapp3.1\ValidationWithMediatr_task.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Nugi\ValidationWithMediatR_Task-implement-CQRS\obj\Debug\netcoreapp3.1\ValidationWithMediatr_task.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Nugi\ValidationWithMediatR_Task-implement-CQRS\obj\Debug\netcoreapp3.1\ValidationWithMediatr_task.AssemblyInfoInputs.cache
+C:\Users\Nugi\ValidationWithMediatR_Task-implement-CQRS\obj\Debug\netcoreapp3.1\ValidationWithMediatr_task.AssemblyInfo.cs
+C:\Users\Nugi\ValidationWithMediatR_Task-implement-CQRS\obj\Debug\netcoreapp3.1\ValidationWithMediatr_task.dll
+C:\Users\Nugi\ValidationWithMediatR_Task-implement-CQRS\obj\Debug\netcoreapp3.1\ValidationWithMediatr_task.pdb

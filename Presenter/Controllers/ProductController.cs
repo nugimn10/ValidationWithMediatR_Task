@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using ValidationWithMediatr_task.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Linq;
+using ValidationWithMediatr_task.Infrastructure.Presistence;
 
 namespace ValidationWithMediatr_task.Presenter.Controllers
 {

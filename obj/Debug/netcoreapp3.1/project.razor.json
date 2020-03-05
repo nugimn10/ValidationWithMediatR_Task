@@ -1,5 +1,5 @@
 {
-  "FilePath": "/Users/user/ValidationWithMediatr_task/ValidationWithMediatr_task.csproj",
+  "FilePath": "c:\\Users\\Nugi\\ValidationWithMediatR_Task\\ValidationWithMediatr_task.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "3.0",
@@ -20496,7 +20496,7 @@
         }
       }
     ],
-    "CSharpLanguageVersion": 703
+    "CSharpLanguageVersion": 800
   },
   "RootNamespace": "ValidationWithMediatr_task",
   "Documents": [],
