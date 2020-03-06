@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ValidationWithMediatr_task.Application.UseCases.Customer.Queries.GetCustomer;
 using ValidationWithMediatr_task.Application.UseCases.Customer.Queries.GetCustomers;
 using ValidationWithMediatr_task.Application.UseCases.Customer.Command.CreateCustomer;
+using ValidationWithMediatr_task.Application.UseCases.Customer.Command.DeleteCustomer;
 using ValidationWithMediatr_task.Infrastructure.Presistence;
 
 namespace ValidationWithMediatr_task.Presenter.Controllers
@@ -50,10 +51,14 @@ namespace ValidationWithMediatr_task.Presenter.Controllers
         //     return Ok();
         // }
 
-        // [HttpDelete("{id}")]
-        // public async Task<ActionResult<GetCustomerDto>> Delete([FromBody] CreateCustomerCommand payload)
-        // {
-        //     return Ok();
-        // }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var command = new DeleteCustomerCommand(id);
+            var result = await _mediatr.Send(command);
+
+            return result != null ? (IActionResult)Ok(new { Message = "success" }) : NotFound(new { Message = "not found" });
+
+        }
     }
 }
