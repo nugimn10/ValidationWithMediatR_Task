@@ -15,7 +15,7 @@ using ValidationWithMediatr_task.Infrastructure.Presistence;
 namespace ValidationWithMediatr_task.Presenter.Controllers
 {
     [ApiController]
-    [Route("payment")]
+    [Route("product")]
     public class ProductController : ControllerBase
     {
         private IMediator _mediatr;
@@ -27,9 +27,9 @@ namespace ValidationWithMediatr_task.Presenter.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<GetProductDto>> GetCustomer()
+        public async Task<ActionResult<GetProductsDto>> GetCustomer()
         {
-            return Ok(await Mediator.Send(new GetProductQuery(){})  );
+            return Ok(await Mediator.Send(new GetProductsQuery(){})  );
         }
 
         [HttpPost]
@@ -39,9 +39,9 @@ namespace ValidationWithMediatr_task.Presenter.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetProductsDto>> GetCustomerById(int id)
+        public async Task<ActionResult<GetProductDto>> GetCustomerById(int id)
         {
-            return Ok(await Mediator.Send(new GetProductsQuery(){id = id})  );
+            return Ok(await Mediator.Send(new GetProductQuery(){id = id})  );
         }
 
         // [HttpPut("{id}")]

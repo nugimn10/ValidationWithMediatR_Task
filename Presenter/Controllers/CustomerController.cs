@@ -29,7 +29,7 @@ namespace ValidationWithMediatr_task.Presenter.Controllers
         [HttpGet]
         public async Task<ActionResult<GetCustomersDto>> GetCustomer()
         {
-            return Ok(await Mediator.Send(new GetCustomerQuery(){})  );
+            return Ok(await Mediator.Send(new GetCustomersQuery(){})  );
         }
 
         [HttpPost]
@@ -39,7 +39,7 @@ namespace ValidationWithMediatr_task.Presenter.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetCustomersDto>> GetCustomerById(int id)
+        public async Task<ActionResult<GetCustomerDto>> GetCustomerById(int id)
         {
             return Ok(await Mediator.Send(new GetCustomerQuery(){id = id})  );
         }

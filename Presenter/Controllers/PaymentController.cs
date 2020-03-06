@@ -27,9 +27,9 @@ namespace ValidationWithMediatr_task.Presenter.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<GetPaymentDto>> GetCustomer()
+        public async Task<ActionResult<GetPaymentsDto>> GetCustomer()
         {
-            return Ok(await Mediator.Send(new GetPaymentQuery(){})  );
+            return Ok(await Mediator.Send(new GetPaymentsQuery(){})  );
         }
 
         [HttpPost]
@@ -39,9 +39,9 @@ namespace ValidationWithMediatr_task.Presenter.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetPaymentsDto>> GetCustomerById(int id)
+        public async Task<ActionResult<GetPaymentDto>> GetCustomerById(int id)
         {
-            return Ok(await Mediator.Send(new GetPaymentsQuery(){id = id})  );
+            return Ok(await Mediator.Send(new GetPaymentQuery(){id = id})  );
         }
 
         // [HttpPut("{id}")]
