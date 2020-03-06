@@ -21,6 +21,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using ValidationWithMediatr_task.Infrastructure.Presistence;
+using ValidationWithMediatr_task.Application.UseCases.Customer.Queries.GetCustomer;
+using System.Reflection;
 
 namespace ValidationWithMediatr_task
 {
@@ -36,6 +38,7 @@ namespace ValidationWithMediatr_task
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMediatR(typeof(GetCreatorQueryHandler).GetTypeInfo().Assembly);
             services.AddDbContext<dbContext>(op => op.UseNpgsql("Host=127.0.0.1;Username=postgres;Password=sayangkamu;Database=dbtokosederhana"));
             services.AddControllers();
             services.AddMvc()
