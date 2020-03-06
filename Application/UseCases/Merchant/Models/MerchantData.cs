@@ -1,5 +1,5 @@
 using System;
-namespace ValidationWithMediatr_task.Application.UseCases.Customer.Models
+namespace ValidationWithMediatr_task.Application.UseCases.Merchant.Models
 {  
     public class MerchantData
     {       

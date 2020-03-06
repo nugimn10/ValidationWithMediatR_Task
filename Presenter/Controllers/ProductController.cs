@@ -1,59 +1,59 @@
-using Microsoft.AspNetCore.Mvc;
-using ValidationWithMediatr_task.Domain.Models;
-using Microsoft.AspNetCore.Authorization;
+  
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using ValidationWithMediatr_task.Application.UseCases.Product.Queries.GetProduct;
+using ValidationWithMediatr_task.Application.UseCases.Product.Queries.GetProducts;
+using ValidationWithMediatr_task.Application.UseCases.Product.Command.CreateProduct;
 using ValidationWithMediatr_task.Infrastructure.Presistence;
 
 namespace ValidationWithMediatr_task.Presenter.Controllers
 {
     [ApiController]
-    [Route("prod")]
+    [Route("payment")]
     public class ProductController : ControllerBase
     {
-        private readonly dbContext _context;
-        public ProductController(dbContext context)
+        private IMediator _mediatr;
+        protected IMediator Mediator => _mediatr ?? (_mediatr = HttpContext.RequestServices.GetService<IMediator>());
+
+        public ProductController()
         {
-            _context = context;
+
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<ActionResult<GetProductDto>> GetCustomer()
         {
-            var pa = _context.Product;
-            return Ok(new {message = "success retrieve data", status = true, data = pa});
+            return Ok(await Mediator.Send(new GetProductQuery(){})  );
         }
 
         [HttpPost]
-        public IActionResult PostMerchant(Product product)
+        public async Task<ActionResult<GetProductQuery>> PostCustomer([FromBody] CreateProductCommand payload)
         {
-            _context.Product.Add(product);
-            _context.SaveChanges();
-            return Ok(product);
+            return Ok(await Mediator.Send(payload)) ;
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<ActionResult<GetProductsDto>> GetCustomerById(int id)
         {
-            var pa = _context.Product.First(i => i.id == id);
-            return Ok(pa);
+            return Ok(await Mediator.Send(new GetProductsQuery(){id = id})  );
         }
 
-        [HttpPut("{id}")]
-        public IActionResult UpdatMerchant(int id)
-        {
-            var pa = _context.Product.First(i => i.id == id);
-            pa.name = "Buruk Rupa";
-            _context.SaveChanges();
-            return Ok(pa);
-        }
+        // [HttpPut("{id}")]
+        // public async Task<ActionResult<Getprod>> Put(int id, [FromBody] string value)
+        // {
+        //     return Ok();
+        // }
 
-        [HttpDelete("{id}")]
-        public IActionResult DelMerchant(int id)
-        {
-            var pa = _context.Product.First(i => i.id == id);
-            _context.Product.Remove(pa);
-            _context.SaveChanges();
-            return Ok(pa);
-        }
+        // [HttpDelete("{id}")]
+        // public async Task<ActionResult<GetPaymentDto>> Delete([FromBody] CreatePaymentCommand payload)
+        // {
+        //     return Ok();
+        // }
     }
 }

@@ -36,7 +36,7 @@ namespace ValidationWithMediatr_task
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<dbContext>(op => op.UseNpgsql("Host=127.0.0.1;Username=postgres;Password=docker;Database=dbtokosederhana"));
+            services.AddDbContext<dbContext>(op => op.UseNpgsql("Host=127.0.0.1;Username=postgres;Password=sayangkamu;Database=dbtokosederhana"));
             services.AddControllers();
             services.AddMvc()
                     .AddFluentValidation();

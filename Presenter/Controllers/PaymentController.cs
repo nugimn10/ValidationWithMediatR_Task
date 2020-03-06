@@ -1,60 +1,59 @@
-using Microsoft.AspNetCore.Mvc;
-using ValidationWithMediatr_task.Domain.Models;
-using Microsoft.AspNetCore.Authorization;
+  
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using ValidationWithMediatr_task.Application.UseCases.Payment.Queries.GetPayment;
+using ValidationWithMediatr_task.Application.UseCases.Payment.Queries.GetPayments;
+using ValidationWithMediatr_task.Application.UseCases.Payment.Command.CreatePayment;
 using ValidationWithMediatr_task.Infrastructure.Presistence;
 
 namespace ValidationWithMediatr_task.Presenter.Controllers
 {
     [ApiController]
     [Route("payment")]
-    [Authorize]
     public class PaymentController : ControllerBase
     {
-        private readonly dbContext _context;
-        public PaymentController(dbContext context)
+        private IMediator _mediatr;
+        protected IMediator Mediator => _mediatr ?? (_mediatr = HttpContext.RequestServices.GetService<IMediator>());
+
+        public PaymentController()
         {
-            _context = context;
+
         }
 
         [HttpGet]
-        public IActionResult GetPayment()
+        public async Task<ActionResult<GetPaymentDto>> GetCustomer()
         {
-            var pa = _context.Customer_Payment_Cards;
-            return Ok(new {message = "success retrieve data", status = true, data = pa});
+            return Ok(await Mediator.Send(new GetPaymentQuery(){})  );
         }
 
         [HttpPost]
-        public IActionResult PostPayment(Customer_Payment_Card payment)
+        public async Task<ActionResult<GetPaymentQuery>> PostCustomer([FromBody] CreatePaymentCommand payload)
         {
-            _context.Customer_Payment_Cards.Add(payment);
-            _context.SaveChanges();
-            return Ok(payment);
+            return Ok(await Mediator.Send(payload)) ;
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetPaymentById(int id)
+        public async Task<ActionResult<GetPaymentsDto>> GetCustomerById(int id)
         {
-            var pa = _context.Customer_Payment_Cards.First(i => i.id == id);
-            return Ok(pa);
+            return Ok(await Mediator.Send(new GetPaymentsQuery(){id = id})  );
         }
 
-        [HttpPut("{id}")]
-        public IActionResult UpdatePayment(int id)
-        {
-            var pa = _context.Customer_Payment_Cards.First(i => i.id == id);
-            pa.name_no_card = "Bonnana Boat";
-            _context.SaveChanges();
-            return Ok(pa);
-        }
+        // [HttpPut("{id}")]
+        // public async Task<ActionResult<GetPaymentDto>> Put(int id, [FromBody] string value)
+        // {
+        //     return Ok();
+        // }
 
-        [HttpDelete("{id}")]
-        public IActionResult DeletePayment(int id)
-        {
-            var pa = _context.Customer_Payment_Cards.First(i => i.id == id);
-            _context.Customer_Payment_Cards.Remove(pa);
-            _context.SaveChanges();
-            return Ok(pa);
-        }
+        // [HttpDelete("{id}")]
+        // public async Task<ActionResult<GetPaymentDto>> Delete([FromBody] CreatePaymentCommand payload)
+        // {
+        //     return Ok();
+        // }
     }
 }

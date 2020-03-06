@@ -44,16 +44,16 @@ namespace ValidationWithMediatr_task.Presenter.Controllers
             return Ok(await Mediator.Send(new GetCustomerQuery(){id = id})  );
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<GetCustomerDto>> Put(int id, [FromBody] string value)
-        {
-            return Ok();
-        }
+        // [HttpPut("{id}")]
+        // public async Task<ActionResult<GetCustomerDto>> Put(int id, [FromBody] string value)
+        // {
+        //     return Ok();
+        // }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<GetCustomerDto>> Delete([FromBody] CreateCustomerCommand payload)
-        {
-            return Ok();
-        }
+        // [HttpDelete("{id}")]
+        // public async Task<ActionResult<GetCustomerDto>> Delete([FromBody] CreateCustomerCommand payload)
+        // {
+        //     return Ok();
+        // }
     }
 }

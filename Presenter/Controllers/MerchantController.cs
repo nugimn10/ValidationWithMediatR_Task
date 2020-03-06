@@ -1,86 +1,59 @@
-using Microsoft.AspNetCore.Mvc;
-using ValidationWithMediatr_task.Domain.Models;
-using Microsoft.AspNetCore.Authorization;
-using System.Linq;
+  
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using ValidationWithMediatr_task.Application.UseCases.Merchant.Queries.GetMerchant;
+using ValidationWithMediatr_task.Application.UseCases.Merchant.Queries.GetMerchants;
+using ValidationWithMediatr_task.Application.UseCases.Merchant.Command.CreateMerchant;
 using ValidationWithMediatr_task.Infrastructure.Presistence;
 
 namespace ValidationWithMediatr_task.Presenter.Controllers
 {
     [ApiController]
-    [Route("merch")]
-    // [Authorize]
+    [Route("merchant")]
     public class MerchantController : ControllerBase
     {
-        private readonly dbContext _context;
-        public MerchantController(dbContext context)
+        private IMediator _mediatr;
+        protected IMediator Mediator => _mediatr ?? (_mediatr = HttpContext.RequestServices.GetService<IMediator>());
+
+        public MerchantController()
         {
-            _context = context;
+
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<ActionResult<GetMerchantDto>> GetCustomer()
         {
-            var merchant = _context.Merchants;
-
-            return Ok(new
-            {
-                message = "success retrieve data",
-                status = true,
-                data = merchant
-            });
-        }
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            var merchant = _context.Merchants.First(i => i.Id == id);
-
-            return Ok(new
-            {
-                message = "success retrieve data",
-                status = true,
-                data = merchant
-            });
-        }
-
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            var merchant = _context.Merchants.First(i => i.Id == id);
-
-            _context.Merchants.Remove(merchant);
-            _context.SaveChanges();
-            return Ok(merchant);
-        }
-
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, RequestData<Merchant> merput)
-        {
-            var mer = _context.Merchants.First(i => i.Id == id);
-
-            mer.name = merput.data.attributes.name;
-            mer.image = merput.data.attributes.image;
-            mer.address = merput.data.attributes.address;
-            mer.rating = merput.data.attributes.rating;
-            mer.created_at = merput.data.attributes.created_at;
-            mer.update_at = DateTime.Now;
-
-            _context.Merchants.Update(mer);
-            _context.SaveChanges();
-            return Ok(mer);
+            return Ok(await Mediator.Send(new GetMerchantQuery(){})  );
         }
 
         [HttpPost]
-        public IActionResult Post(RequestData<Merchant> merchant)
+        public async Task<ActionResult<GetMerchantQuery>> PostCustomer([FromBody] CreateMerchantCommand payload)
         {
-            _context.Merchants.Add(merchant.data.attributes);
-            _context.SaveChanges();
-            return Ok(new
-            {
-                message = "success retrieve data",
-                status = true,
-                data = merchant
-            });
+            return Ok(await Mediator.Send(payload)) ;
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<GetMerchantsDto>> GetCustomerById(int id)
+        {
+            return Ok(await Mediator.Send(new GetMerchantsQuery(){id = id})  );
+        }
+
+        // [HttpPut("{id}")]
+        // public async Task<ActionResult<GetMerchantDto>> Put(int id, [FromBody] string value)
+        // {
+        //     return Ok();
+        // }
+
+        // [HttpDelete("{id}")]
+        // public async Task<ActionResult<GetMerchantDto>> Delete([FromBody] CreateMerchantCommand payload)
+        // {
+        //     return Ok();
+        // }
     }
 }
