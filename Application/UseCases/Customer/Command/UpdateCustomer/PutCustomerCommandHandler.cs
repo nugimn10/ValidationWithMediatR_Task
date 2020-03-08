@@ -1,21 +1,21 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using ValidationWithMediatr_task.Infrastructure.Persistences;
+using ValidationWithMediatr_task.Infrastructure.Presistence;
 using ValidationWithMediatr_task.Application.Models.Query;
-using ValidationWithMediatr_task.Domain.Entities;
+using ValidationWithMediatr_task.Domain.Models;
 using MediatR;
 
-namespace ValidationWithMediatr_task.Application.UseCases.Customer.Command.UpdateCustomer
+namespace ValidationWithMediatr_task.Application.UseCases.Customer.Command.PutCustomerCommand
 {
-    public class PutCustomerCommandHandler: IRequestHandler<UpdateCustomerCommand, UpdateCustomerCommandDto>
+    public class PutCustomerCommandHandler: IRequestHandler<PutCustomerCommand, putcusto>
     {
-        private readonly EcommerceContext _context;
-        public PutCustomerCommandHandler(EcommerceContext context)
+        private readonly dbContext _context;
+        public PutCustomerCommandHandler(dbContext context)
         {
             _context = context;
         }
-        public async Task<UpdateCustomerCommandDto> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<PutcustomerCommandDto> Handle(PutCustomerCommand request, CancellationToken cancellationToken)
         {
             var customers = _context.CustomersData.Find(request.Data.id);
 
