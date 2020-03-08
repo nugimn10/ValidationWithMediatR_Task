@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using ValidationWithMediatr_task.Application.UseCases.Merchant.Queries.GetMerchant;
 using ValidationWithMediatr_task.Application.UseCases.Merchant.Queries.GetMerchants;
 using ValidationWithMediatr_task.Application.UseCases.Merchant.Command.CreateMerchant;
+using ValidationWithMediatr_task.Application.UseCases.Merchant.Command.DeleteMerchant;
+using ValidationWithMediatr_task.Application.UseCases.Merchant.Command.PutMerchant;
 using ValidationWithMediatr_task.Infrastructure.Presistence;
 
 namespace ValidationWithMediatr_task.Presenter.Controllers
@@ -19,41 +21,49 @@ namespace ValidationWithMediatr_task.Presenter.Controllers
     public class MerchantController : ControllerBase
     {
         private IMediator _mediatr;
-        protected IMediator Mediator => _mediatr ?? (_mediatr = HttpContext.RequestServices.GetService<IMediator>());
 
-        public MerchantController()
+        public MerchantController(IMediator Mediator)
         {
-
+            _mediatr = Mediator;
         }
 
         [HttpGet]
-        public async Task<ActionResult<GetMerchantsDto>> GetCustomer()
+        public async Task<ActionResult<GetMerchantsQuery>> GetCustomer()
         {
-            return Ok(await Mediator.Send(new GetMerchantsQuery(){})  );
+            var result = new GetMerchantsDto();
+            return Ok(await _mediatr.Send(result));
         }
 
         [HttpPost]
-        public async Task<ActionResult<GetMerchantQuery>> PostCustomer([FromBody] CreateMerchantCommand payload)
+        public async Task<ActionResult> PostCustomer( CreateMerchantCommand payload)
         {
-            return Ok(await Mediator.Send(payload)) ;
+            var result = await _mediatr.Send(payload);
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<GetMerchantDto>> GetCustomerById(int id)
         {
-            return Ok(await Mediator.Send(new GetMerchantQuery(){id = id})  );
+            var result = new GetMerchantQuery(id);
+            return Ok(await _mediatr.Send(result));
+        }
+        
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int ID, PutMerchantCOmmand data)
+        {
+            data.DataD.Attributes.Id = ID;
+            var result = await _mediatr.Send(data);
+            return Ok(result);
         }
 
-        // [HttpPut("{id}")]
-        // public async Task<ActionResult<GetMerchantDto>> Put(int id, [FromBody] string value)
-        // {
-        //     return Ok();
-        // }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var command = new DeleteMerchantCommand(id);
+            var result = await _mediatr.Send(command);
 
-        // [HttpDelete("{id}")]
-        // public async Task<ActionResult<GetMerchantDto>> Delete([FromBody] CreateMerchantCommand payload)
-        // {
-        //     return Ok();
-        // }
+            return result != null ? (IActionResult)Ok(new { Message = "success" }) : NotFound(new { Message = "not found" });
+
+        }
     }
 }

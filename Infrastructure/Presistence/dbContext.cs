@@ -9,10 +9,10 @@ namespace ValidationWithMediatr_task.Infrastructure.Presistence
     {
         public dbContext(DbContextOptions<dbContext> options) : base(options) { }
 
-        public DbSet<Customer> Customer { get; set; }
-        public DbSet<Product> Product { get; set; }
+        public DbSet<CustomerD> Customer { get; set; }
+        public DbSet<ProductD> Product { get; set; }
         public DbSet<Customer_Payment_Card> Customer_Payment_Cards {get; set;}
-        public DbSet<Merchant> Merchants {get; set;}
+        public DbSet<MerchantD> Merchants {get; set;}
 
         protected override void OnModelCreating (ModelBuilder modelBuilder)
         {
@@ -20,7 +20,7 @@ namespace ValidationWithMediatr_task.Infrastructure.Presistence
             .Entity<Customer_Payment_Card>()
             .HasOne(a => a.customer).WithMany().HasForeignKey(a => a.customer_id);
             modelBuilder
-            .Entity<Product>()
+            .Entity<ProductD>()
             .HasOne(a => a.merchant).WithMany().HasForeignKey(a => a.merchant_id);
         }
 

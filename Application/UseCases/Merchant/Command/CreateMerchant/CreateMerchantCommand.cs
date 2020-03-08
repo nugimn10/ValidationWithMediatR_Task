@@ -6,7 +6,7 @@ namespace ValidationWithMediatr_task.Application.UseCases.Merchant.Command.Creat
 {
     public class CreateMerchantCommand : IRequest<CreateMerchantCommandDto>
     {
-        public CreateMerchantData Data { get; set; }
+        public MerchantD Data { get; set; }
     }
 
     public class CreateMerchantData

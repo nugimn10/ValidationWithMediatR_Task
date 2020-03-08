@@ -1,4 +1,4 @@
-using ValidationWithMediatr_task.Application.UseCases.Customer.Models;
+using ValidationWithMediatr_task.Domain.Models;
 using ValidationWithMediatr_task.Application.Models.Query;
 using System.Collections.Generic;
 
@@ -6,6 +6,6 @@ namespace ValidationWithMediatr_task.Application.UseCases.Customer.Queries.GetCu
 {
     public class GetCustomersDto : BaseDto
     {
-        public IList<CustomerData> Data { get; set; }
+        public IList<CustomerD> Data { get; set; }
     }
 }

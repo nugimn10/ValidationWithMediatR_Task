@@ -18,7 +18,7 @@ namespace ValidationWithMediatr_task.Application.UseCases.Merchant.Queries.GetMe
         public async Task<GetMerchantDto> Handle(GetMerchantQuery request, CancellationToken cancellationToken)
         {
 
-            var result = await _context.Merchants.FirstOrDefaultAsync(e => e.Id == request.id);
+            var result = await _context.Merchants.FirstOrDefaultAsync(e => e.Id == request.Id);
 
             return new GetMerchantDto
             {

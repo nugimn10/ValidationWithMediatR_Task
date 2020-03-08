@@ -7,7 +7,7 @@ namespace ValidationWithMediatr_task.Application.UseCases.Product.Queries.GetPro
     {
         public GetProductValidator()
         {
-            RuleFor(x => x.id).GreaterThan(0).NotEmpty().WithMessage("Id harus terdaftar");
+            RuleFor(x => x.Id).GreaterThan(0).NotEmpty().WithMessage("Id harus terdaftar");
           
         }
     }

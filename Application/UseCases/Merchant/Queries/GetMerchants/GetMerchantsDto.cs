@@ -1,4 +1,4 @@
-using ValidationWithMediatr_task.Application.UseCases.Merchant.Models;
+using ValidationWithMediatr_task.Domain.Models;
 using ValidationWithMediatr_task.Application.Models.Query;
 using System.Collections.Generic;
 
@@ -6,6 +6,6 @@ namespace ValidationWithMediatr_task.Application.UseCases.Merchant.Queries.GetMe
 {
     public class GetMerchantsDto : BaseDto
     {
-        public IList<MerchantData> Data { get; set; }
+        public IList<MerchantD> Data { get; set; }
     }
 }

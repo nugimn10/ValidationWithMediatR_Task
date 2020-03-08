@@ -4,6 +4,11 @@ namespace ValidationWithMediatr_task.Application.UseCases.Payment.Queries.GetPay
 {
     public class GetPaymentQuery : IRequest<GetPaymentDto>
     {
-        public int id { get; set; }
+        public int Id { get; set; }
+
+        public GetPaymentQuery(int id)
+        {
+            Id = id;
+        }
     }
 }

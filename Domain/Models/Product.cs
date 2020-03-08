@@ -1,7 +1,7 @@
 using System;
 namespace ValidationWithMediatr_task.Domain.Models
 {  
-    public class Product
+    public class ProductD
     {
         public int id { get; set; }
         public int merchant_id { get; set; }
@@ -10,6 +10,6 @@ namespace ValidationWithMediatr_task.Domain.Models
         public DateTime created_at { get; set; } = DateTime.Now;
         public DateTime updated_at { get; set; } = DateTime.Now;
 
-        public Merchant merchant {get; set;}
+        public MerchantD merchant {get; set;}
     }
 }

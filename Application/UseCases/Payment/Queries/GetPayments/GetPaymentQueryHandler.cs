@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using ValidationWithMediatr_task.Infrastructure.Presistence;
-using ValidationWithMediatr_task.Application.UseCases.Payment.Models;
+using ValidationWithMediatr_task.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
 using System.Linq;
@@ -21,7 +21,7 @@ namespace ValidationWithMediatr_task.Application.UseCases.Payment.Queries.GetPay
 
             var data = await _context.Customer_Payment_Cards.ToListAsync();
 
-            var result = data.Select(e => new PaymentData
+            var result = data.Select(e => new Customer_Payment_Card
             {
                 customer_id = e.customer_id,
                 credit_card_number = e.credit_card_number,

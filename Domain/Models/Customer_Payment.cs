@@ -13,7 +13,7 @@ namespace ValidationWithMediatr_task.Domain.Models
         public DateTime created_at { get; set; } = DateTime.Now;
         public DateTime updated_at { get; set; } = DateTime.Now;
 
-        public Customer customer {get; set;}
+        public CustomerD customer {get; set;}
     }
 
 }

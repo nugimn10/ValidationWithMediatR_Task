@@ -1,4 +1,4 @@
-using ValidationWithMediatr_task.Application.UseCases.Payment.Models;
+using ValidationWithMediatr_task.Domain.Models;
 using ValidationWithMediatr_task.Application.Models.Query;
 using System.Collections.Generic;
 
@@ -6,6 +6,6 @@ namespace ValidationWithMediatr_task.Application.UseCases.Payment.Queries.GetPay
 {
     public class GetPaymentsDto : BaseDto
     {
-        public IList<PaymentData> Data { get; set; }
+        public IList<Customer_Payment_Card> Data { get; set; }
     }
 }

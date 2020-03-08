@@ -1,5 +1,5 @@
 using FluentValidation;
-using ValidationWithMediatr_task.Application.UseCases.Customer.Models;
+
 
 namespace ValidationWithMediatr_task.Application.UseCases.Customer.Queries.GetCustomer
 {
@@ -7,7 +7,7 @@ namespace ValidationWithMediatr_task.Application.UseCases.Customer.Queries.GetCu
     {
         public GetCustomerValidator()
         {
-            RuleFor(x => x.id).GreaterThan(0).NotEmpty().WithMessage("Id harus terdaftar");
+            RuleFor(x => x.Id).GreaterThan(0).NotEmpty().WithMessage("Id harus terdaftar");
           
         }
     }

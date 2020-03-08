@@ -1,7 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 // using ValidationWithMediatr_task.Application.Interfaces;
-using ValidationWithMediatr_task.Application.UseCases.Customer.Models;
 using ValidationWithMediatr_task.Infrastructure.Presistence;
 using Microsoft.EntityFrameworkCore;
 using MediatR;

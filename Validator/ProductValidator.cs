@@ -6,7 +6,7 @@ using ValidationWithMediatr_task.Domain.Models;
 
 namespace ValidationWithMediatr_task.Validator
 {
-    public class ProductValidator : AbstractValidator<Product>
+    public class ProductValidator : AbstractValidator<ProductD>
     {
         public ProductValidator()
         {

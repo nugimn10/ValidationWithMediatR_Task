@@ -4,6 +4,11 @@ namespace ValidationWithMediatr_task.Application.UseCases.Merchant.Queries.GetMe
 {
     public class GetMerchantQuery: IRequest<GetMerchantDto>
     {
-        public int id { get; set; }
+        public int Id { get; set; }
+
+        public GetMerchantQuery(int id)
+        {
+            Id = id;
+        }
     }
 }

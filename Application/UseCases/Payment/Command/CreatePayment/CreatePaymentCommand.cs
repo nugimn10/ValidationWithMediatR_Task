@@ -17,6 +17,7 @@ namespace ValidationWithMediatr_task.Application.UseCases.Payment.Command.Create
         public string exp_year { get; set; }
         public int postal_code { get; set; }
         public string credit_card_number { get; set; }
+        public CustomerD customer {get; set;}
 
     }
 

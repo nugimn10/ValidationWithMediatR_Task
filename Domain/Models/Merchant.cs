@@ -1,7 +1,7 @@
 using System;
 namespace ValidationWithMediatr_task.Domain.Models
 {  
-    public class Merchant
+    public class MerchantD
     {
         public int Id { get; set; }
         public string name { get; set; }

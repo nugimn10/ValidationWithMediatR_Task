@@ -44,10 +44,10 @@ namespace ValidationWithMediatr_task
             services.AddMvc()
                     .AddFluentValidation();
             
-            services.AddTransient<IValidator<Customer>, CustomerValidator>();
-            services.AddTransient<IValidator<Product>, ProductValidator>();
+            services.AddTransient<IValidator<CustomerD>, CustomerValidator>();
+            services.AddTransient<IValidator<ProductD>, ProductValidator>();
             services.AddTransient<IValidator<Customer_Payment_Card>, CustomerpayValidator>();
-            services.AddTransient<IValidator<Merchant>, MerchantValidator>();
+            services.AddTransient<IValidator<MerchantD>, MerchantValidator>();
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidator<,>));
 
             services.AddAuthentication( options => {

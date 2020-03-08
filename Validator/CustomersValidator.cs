@@ -6,7 +6,7 @@ using ValidationWithMediatr_task.Domain.Models;
 
 namespace ValidationWithMediatr_task.Validator
 {
-    public class CustomerValidator : AbstractValidator<Customer>
+    public class CustomerValidator : AbstractValidator<CustomerD>
     {
         public CustomerValidator()
         {
@@ -14,7 +14,7 @@ namespace ValidationWithMediatr_task.Validator
             RuleFor(x => x.username).MaximumLength(20).WithMessage("Max username length");
             RuleFor(x => x.email).NotEmpty().WithMessage("Email Cant Be Empty");
             RuleFor(x => x.email).EmailAddress().WithMessage("Email is not valid email address");
-            RuleFor(x => x.gender).IsInEnum<Customer, Gender>().WithMessage("gender is one of male or female");
+            RuleFor(x => x.gender).IsInEnum<CustomerD, Gender>().WithMessage("gender is one of male or female");
             RuleFor(x => x.gender).NotEmpty().WithMessage("gender cant be empty");
             RuleFor(x => x.birthdate).NotEmpty().WithMessage("birthday cant be empty");
             RuleFor(x => DateTime.Now.Year - x.birthdate.Year).GreaterThanOrEqualTo(18).WithMessage("age must be greater than 18");

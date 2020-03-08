@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using ValidationWithMediatr_task.Infrastructure.Presistence;
-using ValidationWithMediatr_task.Application.UseCases.Payment.Models;
+using ValidationWithMediatr_task.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
 
@@ -18,13 +18,13 @@ namespace ValidationWithMediatr_task.Application.UseCases.Payment.Queries.GetPay
         public async Task<GetPaymentDto> Handle(GetPaymentQuery request, CancellationToken cancellationToken)
         {
 
-            var result = await _context.Customer_Payment_Cards.FirstOrDefaultAsync(e => e.id == request.id);
+            var result = await _context.Customer_Payment_Cards.FirstOrDefaultAsync(e => e.id == request.Id);
 
             return new GetPaymentDto
             {
                 Success = true,
                 Message = "Creator successfully retrieved",
-                Data = new PaymentData
+                Data = new Customer_Payment_Card
                 {
                     customer_id = result.customer_id,
                     credit_card_number = result.credit_card_number,

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using ValidationWithMediatr_task.Application.UseCases.Payment.Command.DeletePayment;
+using ValidationWithMediatr_task.Application.UseCases.Payment.Command.PutPayment;
 using ValidationWithMediatr_task.Application.UseCases.Payment.Queries.GetPayment;
 using ValidationWithMediatr_task.Application.UseCases.Payment.Queries.GetPayments;
 using ValidationWithMediatr_task.Application.UseCases.Payment.Command.CreatePayment;
@@ -19,41 +21,49 @@ namespace ValidationWithMediatr_task.Presenter.Controllers
     public class PaymentController : ControllerBase
     {
         private IMediator _mediatr;
-        protected IMediator Mediator => _mediatr ?? (_mediatr = HttpContext.RequestServices.GetService<IMediator>());
 
-        public PaymentController()
+        public PaymentController(IMediator Mediator)
         {
-
+            _mediatr = Mediator;
         }
 
         [HttpGet]
-        public async Task<ActionResult<GetPaymentsDto>> GetCustomer()
+        public async Task<ActionResult<GetPaymentsQuery>> GetCustomer()
         {
-            return Ok(await Mediator.Send(new GetPaymentsQuery(){})  );
+            var result = new GetPaymentsDto();
+            return Ok(await _mediatr.Send(result));
         }
 
         [HttpPost]
-        public async Task<ActionResult<GetPaymentQuery>> PostCustomer([FromBody] CreatePaymentCommand payload)
+        public async Task<ActionResult> PostCustomer( CreatePaymentCommand payload)
         {
-            return Ok(await Mediator.Send(payload)) ;
+            var result = await _mediatr.Send(payload);
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<GetPaymentDto>> GetCustomerById(int id)
         {
-            return Ok(await Mediator.Send(new GetPaymentQuery(){id = id})  );
+            var result = new GetPaymentQuery(id);
+            return Ok(await _mediatr.Send(result));
+        }
+        
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int ID, PutPaymentCommand data)
+        {
+            data.DataD.Attributes.id = ID;
+            var result = await _mediatr.Send(data);
+            return Ok(result);
         }
 
-        // [HttpPut("{id}")]
-        // public async Task<ActionResult<GetPaymentDto>> Put(int id, [FromBody] string value)
-        // {
-        //     return Ok();
-        // }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var command = new DeletePaymentCommand(id);
+            var result = await _mediatr.Send(command);
 
-        // [HttpDelete("{id}")]
-        // public async Task<ActionResult<GetPaymentDto>> Delete([FromBody] CreatePaymentCommand payload)
-        // {
-        //     return Ok();
-        // }
+            return result != null ? (IActionResult)Ok(new { Message = "success" }) : NotFound(new { Message = "not found" });
+
+        }
     }
 }

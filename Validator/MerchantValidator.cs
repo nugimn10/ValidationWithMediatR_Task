@@ -6,7 +6,7 @@ using ValidationWithMediatr_task.Domain.Models;
 
 namespace ValidationWithMediatr_task.Validator
 {
-    public class MerchantValidator : AbstractValidator<Merchant>
+    public class MerchantValidator : AbstractValidator<MerchantD>
     {
         public MerchantValidator()
         {

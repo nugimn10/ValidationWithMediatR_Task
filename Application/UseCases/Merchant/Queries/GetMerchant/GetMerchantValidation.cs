@@ -1,5 +1,4 @@
 using FluentValidation;
-using ValidationWithMediatr_task.Application.UseCases.Customer.Models;
 
 namespace ValidationWithMediatr_task.Application.UseCases.Merchant.Queries.GetMerchant
 {
@@ -7,7 +6,7 @@ namespace ValidationWithMediatr_task.Application.UseCases.Merchant.Queries.GetMe
     {
         public GetMerchantValidator()
         {
-            RuleFor(x => x.id).GreaterThan(0).NotEmpty().WithMessage("Id harus terdaftar");
+            RuleFor(x => x.Id).GreaterThan(0).NotEmpty().WithMessage("Id harus terdaftar");
           
         }
     }

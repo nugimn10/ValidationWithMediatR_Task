@@ -7,7 +7,7 @@ namespace ValidationWithMediatr_task.Application.UseCases.Payment.Queries.GetPay
     {
         public GetPaymentValidator()
         {
-            RuleFor(x => x.id).GreaterThan(0).NotEmpty().WithMessage("Id harus terdaftar");
+            RuleFor(x => x.Id).GreaterThan(0).NotEmpty().WithMessage("Id harus terdaftar");
           
         }
     }

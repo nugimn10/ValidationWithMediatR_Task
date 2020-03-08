@@ -1,7 +1,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using ValidationWithMediatr_task.Infrastructure.Presistence;
-using ValidationWithMediatr_task.Application.UseCases.Customer.Models;
+using ValidationWithMediatr_task.Domain.Models;
+
 using Microsoft.EntityFrameworkCore;
 using MediatR;
 
@@ -18,13 +19,13 @@ namespace ValidationWithMediatr_task.Application.UseCases.Customer.Queries.GetCu
         public async Task<GetCustomerDto> Handle(GetCustomerQuery request, CancellationToken cancellationToken)
         {
 
-            var result = await _context.Customer.FirstOrDefaultAsync(e => e.id == request.id);
+            var result = await _context.Customer.FirstOrDefaultAsync(e => e.id == request.Id);
 
             return new GetCustomerDto
             {
                 Success = true,
-                Message = "Creator successfully retrieved",
-                Data = new CustomerData
+                Message = "Customerw successfully retrieved",
+                Data = new CustomerD
                 {
                     fullname = result.fullname,
                     username = result.username,

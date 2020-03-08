@@ -14,12 +14,12 @@ namespace ValidationWithMediatr_task.Presenter.Controllers
     public class UserController : ControllerBase
     {
         [HttpPost]
-        public IActionResult Authenticate(User user)
+        public IActionResult Authenticate(UserD user)
         {
-            var users = new List<User>()
+            var users = new List<UserD>()
             {
-                new User() { Username="nugi", Password="aaaa"},
-                new User() { Username="nugi2", Password="aaaa"}
+                new UserD() { Username="nugi", Password="aaaa"},
+                new UserD() { Username="nugi2", Password="aaaa"}
             };
 
             var _user = users.Find(e => e.Username == user.Username);

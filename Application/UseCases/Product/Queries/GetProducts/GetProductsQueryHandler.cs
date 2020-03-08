@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using ValidationWithMediatr_task.Infrastructure.Presistence;
-using ValidationWithMediatr_task.Application.UseCases.Product.Models;
+using ValidationWithMediatr_task.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
 using System.Linq;
@@ -21,7 +21,7 @@ namespace ValidationWithMediatr_task.Application.UseCases.Product.Queries.GetPro
 
             var data = await _context.Product.ToListAsync();
 
-            var result = data.Select(e => new ProductData
+            var result = data.Select(e => new ProductD
             {
                 name = e.name,
                 price = e.price,

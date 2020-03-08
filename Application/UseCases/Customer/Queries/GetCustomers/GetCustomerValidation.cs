@@ -1,5 +1,4 @@
 using FluentValidation;
-using ValidationWithMediatr_task.Application.UseCases.Customer.Models;
 
 namespace ValidationWithMediatr_task.Application.UseCases.Customer.Queries.GetCustomers
 {

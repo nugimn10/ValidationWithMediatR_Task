@@ -4,6 +4,10 @@ namespace ValidationWithMediatr_task.Application.UseCases.Customer.Queries.GetCu
 {
     public class GetCustomerQuery: IRequest<GetCustomerDto>
     {
-        public int id { get; set; }
+        public int Id { get; set; }
+        public GetCustomerQuery(int id)
+        {
+            Id = id;
+        }
     }
 }

@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using ValidationWithMediatr_task.Infrastructure.Presistence;
-using ValidationWithMediatr_task.Application.UseCases.Product.Models;
+using ValidationWithMediatr_task.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
 
@@ -18,13 +18,13 @@ namespace ValidationWithMediatr_task.Application.UseCases.Product.Queries.GetPro
         public async Task<GetProductDto> Handle(GetProductQuery request, CancellationToken cancellationToken)
         {
 
-            var result = await _context.Product.FirstOrDefaultAsync(e => e.id == request.id);
+            var result = await _context.Product.FirstOrDefaultAsync(e => e.id == request.Id);
 
             return new GetProductDto
             {
                 Success = true,
                 Message = "Creator successfully retrieved",
-                Data = new ProductData
+                Data = new ProductD
                 {
                     name = result.name,
                     price = result.price,

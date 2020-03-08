@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using ValidationWithMediatr_task.Infrastructure.Presistence;
-using ValidationWithMediatr_task.Application.UseCases.Customer.Models;
+using ValidationWithMediatr_task.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
 using System.Linq;
@@ -21,7 +21,7 @@ namespace ValidationWithMediatr_task.Application.UseCases.Customer.Queries.GetCu
 
             var data = await _context.Customer.ToListAsync();
 
-            var result = data.Select(e => new CustomerData
+            var result = data.Select(e => new CustomerD
             {
                 fullname = e.fullname,
                 username = e.username,
