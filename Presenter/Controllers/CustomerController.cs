@@ -35,7 +35,7 @@ namespace ValidationWithMediatr_task.Presenter.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> PostCustomer( CreateCustomerCommand payload)
+        public async Task<IActionResult> PostCustomer( CreateCustomerCommand payload)
         {
             var result = await _mediatr.Send(payload);
             return Ok(result);
@@ -62,7 +62,7 @@ namespace ValidationWithMediatr_task.Presenter.Controllers
             var command = new DeleteCustomerCommand(id);
             var result = await _mediatr.Send(command);
 
-            return result != null ? (IActionResult)Ok(new { Message = "success" }) : NotFound(new { Message = "not found" });
+            return result != null ? (ActionResult)Ok(new { Message = "success" }) : NotFound(new { Message = "not found" });
 
         }
     }

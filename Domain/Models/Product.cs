@@ -7,8 +7,9 @@ namespace ValidationWithMediatr_task.Domain.Models
         public int merchant_id { get; set; }
         public string name { get; set; }
         public int price { get; set; }
-        public DateTime created_at { get; set; } = DateTime.Now;
-        public DateTime updated_at { get; set; } = DateTime.Now;
+        public long created_at { get; set; } = Convert.ToInt64((DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime()).TotalSeconds);
+        public long updated_at { get; set; } = Convert.ToInt64((DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime()).TotalSeconds);
+    
 
         public MerchantD merchant {get; set;}
     }

@@ -10,8 +10,9 @@ namespace ValidationWithMediatr_task.Domain.Models
         public string exp_year { get; set; }
         public int postal_code { get; set; }
         public string credit_card_number { get; set; }
-        public DateTime created_at { get; set; } = DateTime.Now;
-        public DateTime updated_at { get; set; } = DateTime.Now;
+        public long created_at { get; set; } = Convert.ToInt64((DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime()).TotalSeconds);
+        public long updated_at { get; set; } = Convert.ToInt64((DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime()).TotalSeconds);
+    
 
         public CustomerD customer {get; set;}
     }

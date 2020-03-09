@@ -8,11 +8,11 @@ using MediatR;
 
 namespace ValidationWithMediatr_task.Application.UseCases.Customer.Queries.GetCustomer
 {
-    public class GetCreatorQueryHandler : IRequestHandler<GetCustomerQuery, GetCustomerDto>
+    public class GetCustomerQueryHandler : IRequestHandler<GetCustomerQuery, GetCustomerDto>
     {
         private readonly dbContext _context;
 
-        public GetCreatorQueryHandler(dbContext context)
+        public GetCustomerQueryHandler(dbContext context)
         {
             _context = context;
         }

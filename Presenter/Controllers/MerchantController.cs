@@ -51,7 +51,7 @@ namespace ValidationWithMediatr_task.Presenter.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int ID, PutMerchantCOmmand data)
         {
-            data.DataD.Attributes.Id = ID;
+            data.DataD.Attributes.id = ID;
             var result = await _mediatr.Send(data);
             return Ok(result);
         }

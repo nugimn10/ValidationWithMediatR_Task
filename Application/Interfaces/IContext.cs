@@ -6,16 +6,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ValidationWithMediatr_task.Application.Interfaces
 {
-    public interface IContext
+    public class IContext : DbContext
     {
 
 
-        DbSet<CustomerD> Customer { get; set; }
-        DbSet<ProductD> Product { get; set; }
-        DbSet<Customer_Payment_Card> Customer_Payment_Cards {get; set;}
-        DbSet<MerchantD> Merchants {get; set;} 
+        public IContext(DbContextOptions<IContext> options) : base(options) { }
 
-        Task<int> SaveChangesAsync(CancellationToken cancellation);
+        public DbSet<CustomerD> Customer { get; set; }
+        public DbSet<ProductD> Product { get; set; }
+        public DbSet<Customer_Payment_Card> Customer_Payment_Cards {get; set;}
+        public DbSet<MerchantD> Merchants {get; set;}
     
     }
 }

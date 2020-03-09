@@ -23,7 +23,7 @@ namespace ValidationWithMediatr_task.Application.UseCases.Product.Command.PutPro
             Product.merchant_id = request.DataD.Attributes.merchant_id;
             Product.name = request.DataD.Attributes.name;
             Product.price = request.DataD.Attributes.price;
-            Product.updated_at = DateTime.Now;
+            Product.updated_at = Convert.ToInt64((DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime()).TotalSeconds);
 
 
             await _context.SaveChangesAsync(cancellationToken);

@@ -1,28 +1,36 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
+using ValidationWithMediatr_task.Application.Interfaces;
+using ValidationWithMediatr_task.Application.Models.Query;
+using ValidationWithMediatr_task.Application.UseCases.Customer.Command.CreateCustomer;
+using ValidationWithMediatr_task.Application.UseCases.Customer.Queries.GetCustomer;
+using ValidationWithMediatr_task.Application.UseCases.Payment.Command.CreatePayment;
+using ValidationWithMediatr_task.Application.UseCases.Payment.Queries.GetPayment;
+using ValidationWithMediatr_task.Application.UseCases.Merchant.Command.CreateMerchant;
+using ValidationWithMediatr_task.Application.UseCases.Merchant.Queries.GetMerchant;
+using ValidationWithMediatr_task.Application.UseCases.Product.Command.CreateProduct;
+using ValidationWithMediatr_task.Application.UseCases.Product.Queries.GetProduct;
+using ValidationWithMediatr_task.Domain.Models;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
-using Npgsql;
-using ValidationWithMediatr_task.Domain.Models;
-using FluentValidation.AspNetCore;
-using FluentValidation;
-using ValidationWithMediatr_task.Validator;
-using MediatR;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using ValidationWithMediatr_task.Infrastructure.Presistence;
-using ValidationWithMediatr_task.Application.UseCases.Customer.Queries.GetCustomer;
-using System.Reflection;
+using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
+
 
 namespace ValidationWithMediatr_task
 {
@@ -38,30 +46,38 @@ namespace ValidationWithMediatr_task
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMediatR(typeof(GetCreatorQueryHandler).GetTypeInfo().Assembly);
-            services.AddDbContext<dbContext>(op => op.UseNpgsql("Host=127.0.0.1;Username=postgres;Password=sayangkamu;Database=dbtokosederhana"));
+            services.AddDbContext<dbContext>(option => option.UseNpgsql("Host=127.0.0.1;Username=postgres;Password=sayangkamu;Database=dbtokosederhana"));
             services.AddControllers();
-            services.AddMvc()
-                    .AddFluentValidation();
-            
-            services.AddTransient<IValidator<CustomerD>, CustomerValidator>();
-            services.AddTransient<IValidator<ProductD>, ProductValidator>();
-            services.AddTransient<IValidator<Customer_Payment_Card>, CustomerpayValidator>();
-            services.AddTransient<IValidator<MerchantD>, MerchantValidator>();
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidator<,>));
 
-            services.AddAuthentication( options => {
+            services.AddMvc().AddFluentValidation();
+
+            services.AddMediatR(typeof(GetCustomerQueryHandler).GetTypeInfo().Assembly);
+            // services.AddMediatR(typeof(GetPaymentQueryHandler).GetTypeInfo().Assembly);
+            // services.AddMediatR(typeof(GetMerchantQueryHandler).GetTypeInfo().Assembly);
+            // services.AddMediatR(typeof(GetProdcutQueryHandler).GetTypeInfo().Assembly);
+
+            services.AddAuthentication(options => {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(option => {
+                option.SaveToken = false;
                 option.RequireHttpsMetadata = false;
-                option.TokenValidationParameters = new TokenValidationParameters{
+                option.TokenValidationParameters = new TokenValidationParameters
+                {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("ini secret key nya harus panjang")),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("ini secret key")),
                     ValidateIssuer = false,
                     ValidateAudience = false,
                 };
             });
+
+            services.AddTransient<IValidator<CreateCustomerCommand>, CreateCustomerCommandValidator>();
+                // .AddTransient<IValidator<CreatePaymentCommand>, CreatePaymentCommandValidator>()
+                // .AddTransient<IValidator<CreateMerchantCommand>, CreateMerchantCommandValidator>()
+                // .AddTransient<IValidator<CreateProductCommand>, CreateProductCommandValidator>();
+
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidator<,>));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,6 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using ValidationWithMediatr_task.Infrastructure.Presistence;
+using ValidationWithMediatr_task.Application.Interfaces;
 using ValidationWithMediatr_task.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
@@ -9,15 +10,15 @@ namespace ValidationWithMediatr_task.Application.UseCases.Customer.Command.Delet
 {
     public class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerCommand, DeleteCustomerCommandDto>
     {
-        private readonly dbContext _context;
+        private readonly IContext _context;
 
-        public DeleteCustomerCommandHandler(dbContext context)
+        public DeleteCustomerCommandHandler(IContext context)
         {
             _context = context;
         }
         public async Task<DeleteCustomerCommandDto> Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
         {
-            var delete = await _context.Customer.FindAsync(request.id);
+            var delete = await _context.Customer.FindAsync(request.Id);
 
             if (delete == null)
             {

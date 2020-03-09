@@ -20,8 +20,8 @@ namespace ValidationWithMediatr_task.Application.UseCases.Product.Command.Create
 
             var product = new Domain.Models.ProductD
             {
-                name = request.Data.name,
-                price = request.Data.price
+                name = request.DataD.Attributes.name,
+                price = request.DataD.Attributes.price
             };
 
             _context.Product.Add(product);

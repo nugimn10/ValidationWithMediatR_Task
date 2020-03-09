@@ -5,11 +5,11 @@ namespace ValidationWithMediatr_task.Application.UseCases.Customer.Command.Delet
 {
     public class DeleteCustomerCommand : IRequest<DeleteCustomerCommandDto>
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
-        public DeleteCustomerCommand(int Id)
+        public DeleteCustomerCommand(int id)
         {
-            id = Id;
+            Id = id;
         }
     }
 }

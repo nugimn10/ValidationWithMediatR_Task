@@ -17,9 +17,7 @@ namespace ValidationWithMediatr_task.Domain.Models
         public string kelamin { get; set; }
         public string email { get; set; }
         public string phoneNumber { get; set; }
-        public DateTime created_at { get; set; } = DateTime.Now;
-        public DateTime updated_at { get; set; } = DateTime.Now;
+        public long created_at { get; set; } = Convert.ToInt64((DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime()).TotalSeconds);
+        public long updated_at { get; set; } = Convert.ToInt64((DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime()).TotalSeconds);
     }
-
-
 }

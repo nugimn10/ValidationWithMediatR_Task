@@ -27,7 +27,7 @@ namespace ValidationWithMediatr_task.Application.UseCases.Customer.Command.PutCu
             customers.kelamin = request.DataD.Attributes.kelamin;
             customers.email = request.DataD.Attributes.email;
             customers.phoneNumber = request.DataD.Attributes.phoneNumber;
-            customers.updated_at = DateTime.Now;
+            customers.updated_at = Convert.ToInt64((DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime()).TotalSeconds);
 
             await _context.SaveChangesAsync(cancellationToken);
 

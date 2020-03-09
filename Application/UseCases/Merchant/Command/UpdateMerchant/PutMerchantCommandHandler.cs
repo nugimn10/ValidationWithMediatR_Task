@@ -17,13 +17,13 @@ namespace ValidationWithMediatr_task.Application.UseCases.Merchant.Command.PutMe
         }
         public async Task<PutMerchantCommandDto> Handle(PutMerchantCOmmand request, CancellationToken cancellationToken)
         {
-            var merchant = _context.Merchants.Find(request.DataD.Attributes.Id);
+            var merchant = _context.Merchants.Find(request.DataD.Attributes.id);
 
             merchant.name = request.DataD.Attributes.name;
             merchant.address = request.DataD.Attributes.address;
             merchant.image = request.DataD.Attributes.image;
             merchant.rating = request.DataD.Attributes.rating;
-            merchant.update_at = request.DataD.Attributes.update_at;
+            merchant.updated_at = Convert.ToInt64((DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime()).TotalSeconds);
 
 
             await _context.SaveChangesAsync(cancellationToken);

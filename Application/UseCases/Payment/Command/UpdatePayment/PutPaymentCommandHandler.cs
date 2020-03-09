@@ -26,7 +26,7 @@ namespace ValidationWithMediatr_task.Application.UseCases.Payment.Command.PutPay
             payment_Card.exp_year = request.DataD.Attributes.exp_year;
             payment_Card.postal_code = request.DataD.Attributes.postal_code;
             payment_Card.credit_card_number = request.DataD.Attributes.credit_card_number;
-            payment_Card.updated_at =  DateTime.Now;
+            payment_Card.updated_at = Convert.ToInt64((DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime()).TotalSeconds);
 
 
             await _context.SaveChangesAsync(cancellationToken);
