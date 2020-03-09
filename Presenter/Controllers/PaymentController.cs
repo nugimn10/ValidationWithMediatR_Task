@@ -13,11 +13,13 @@ using ValidationWithMediatr_task.Application.UseCases.Payment.Queries.GetPayment
 using ValidationWithMediatr_task.Application.UseCases.Payment.Queries.GetPayments;
 using ValidationWithMediatr_task.Application.UseCases.Payment.Command.CreatePayment;
 using ValidationWithMediatr_task.Infrastructure.Presistence;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ValidationWithMediatr_task.Presenter.Controllers
 {
     [ApiController]
     [Route("payment")]
+    [Authorize]
     public class PaymentController : ControllerBase
     {
         private IMediator _mediatr;

@@ -21,17 +21,11 @@ namespace ValidationWithMediatr_task.Application.UseCases.Product.Queries.GetPro
 
             var data = await _context.Product.ToListAsync();
 
-            var result = data.Select(e => new ProductD
-            {
-                name = e.name,
-                price = e.price,
-            });
-
             return new GetProductsDto
             {
                 Success = true,
                 Message = "Creator successfully retrieved",
-                Data = result.ToList()
+                Data = data
             };
 
         }

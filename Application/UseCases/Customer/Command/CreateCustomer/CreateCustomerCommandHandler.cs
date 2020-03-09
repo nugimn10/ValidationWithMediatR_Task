@@ -12,9 +12,9 @@ namespace ValidationWithMediatr_task.Application.UseCases.Customer.Command.Creat
 {
     public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, CreateCustomerCommandDto>
     {
-        private readonly IContext _context;
+        private readonly dbContext _context;
 
-        public CreateCustomerCommandHandler (IContext context)
+        public CreateCustomerCommandHandler (dbContext context)
         {
             _context = context;
         }

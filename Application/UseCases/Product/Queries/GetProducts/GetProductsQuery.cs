@@ -4,11 +4,7 @@ namespace ValidationWithMediatr_task.Application.UseCases.Product.Queries.GetPro
 {
     public class GetProductsQuery: IRequest<GetProductsDto>
     {
-        public int Id { get; set; }
 
-        public GetProductsQuery (int id)
-        {
-            id =Id;
-        }
+
     }
 }

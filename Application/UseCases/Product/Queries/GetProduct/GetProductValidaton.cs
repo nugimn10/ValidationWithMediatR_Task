@@ -1,5 +1,4 @@
 using FluentValidation;
-using ValidationWithMediatr_task.Application.UseCases.Payment.Models;
 
 namespace ValidationWithMediatr_task.Application.UseCases.Product.Queries.GetProduct
 {

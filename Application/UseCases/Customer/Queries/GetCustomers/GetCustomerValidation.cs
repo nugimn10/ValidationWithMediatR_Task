@@ -6,7 +6,7 @@ namespace ValidationWithMediatr_task.Application.UseCases.Customer.Queries.GetCu
     {
         public GetCustomerValidator()
         {
-            RuleFor(x => x.id).GreaterThan(0).NotEmpty().WithMessage("Id harus terdaftar");
+
           
         }
     }

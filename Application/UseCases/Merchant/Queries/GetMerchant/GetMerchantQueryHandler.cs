@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using ValidationWithMediatr_task.Infrastructure.Presistence;
-using ValidationWithMediatr_task.Application.UseCases.Merchant.Models;
+using ValidationWithMediatr_task.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
 
@@ -24,7 +24,7 @@ namespace ValidationWithMediatr_task.Application.UseCases.Merchant.Queries.GetMe
             {
                 Success = true,
                 Message = "Creator successfully retrieved",
-                Data = new MerchantData
+                Data = new MerchantD
                 {
                     name = result.name,
                     address = result.address,

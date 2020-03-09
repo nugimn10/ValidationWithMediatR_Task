@@ -11,8 +11,8 @@ namespace ValidationWithMediatr_task.Application.UseCases.Customer.Command.PutCu
 {
     public class PutCustomerCommandHandler: IRequestHandler<PutCustomerCommand, PutCustomerCommandDto>
     {
-        private readonly IContext _context;
-        public PutCustomerCommandHandler(IContext context)
+        private readonly dbContext _context;
+        public PutCustomerCommandHandler(dbContext context)
         {
             _context = context;
         }

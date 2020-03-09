@@ -10,9 +10,9 @@ namespace ValidationWithMediatr_task.Application.UseCases.Customer.Command.Delet
 {
     public class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerCommand, DeleteCustomerCommandDto>
     {
-        private readonly IContext _context;
+        private readonly dbContext _context;
 
-        public DeleteCustomerCommandHandler(IContext context)
+        public DeleteCustomerCommandHandler(dbContext context)
         {
             _context = context;
         }

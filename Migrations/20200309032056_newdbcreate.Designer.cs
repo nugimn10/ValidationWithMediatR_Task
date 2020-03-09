@@ -5,14 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using ValidationWithMediatr_task.Domain.Models;
-using ValidationWithMediatr_task.Infrastructure.Presistence.Migrations;
+using ValidationWithMediatr_task.Infrastructure.Presistence;
 
-namespace ValidationWithMediatr_task.Infrastructure.Presistence.Migrations
+namespace ValidationWithMediatr_task.Migrations
 {
     [DbContext(typeof(dbContext))]
-    [Migration("20200303085229_initialCreate")]
-    partial class initialCreate
+    [Migration("20200309032056_newdbcreate")]
+    partial class newdbcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,18 +21,18 @@ namespace ValidationWithMediatr_task.Infrastructure.Presistence.Migrations
                 .HasAnnotation("ProductVersion", "3.1.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("ValidationWithMediatr_task.Models.Customer", b =>
+            modelBuilder.Entity("ValidationWithMediatr_task.Domain.Models.CustomerD", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<DateTime>("MyProperty")
+                    b.Property<DateTime>("birthdate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateTime>("created_at")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<long>("created_at")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("email")
                         .HasColumnType("text");
@@ -44,14 +43,17 @@ namespace ValidationWithMediatr_task.Infrastructure.Presistence.Migrations
                     b.Property<int>("gender")
                         .HasColumnType("integer");
 
+                    b.Property<string>("kelamin")
+                        .HasColumnType("text");
+
                     b.Property<string>("passowrd")
                         .HasColumnType("text");
 
                     b.Property<string>("phoneNumber")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("updated_at")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<long>("updated_at")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("username")
                         .HasColumnType("text");
@@ -61,15 +63,15 @@ namespace ValidationWithMediatr_task.Infrastructure.Presistence.Migrations
                     b.ToTable("Customer");
                 });
 
-            modelBuilder.Entity("ValidationWithMediatr_task.Models.Customer_Payment_Card", b =>
+            modelBuilder.Entity("ValidationWithMediatr_task.Domain.Models.Customer_Payment_Card", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<DateTime>("created_at")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<long>("created_at")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("credit_card_number")
                         .HasColumnType("text");
@@ -89,17 +91,19 @@ namespace ValidationWithMediatr_task.Infrastructure.Presistence.Migrations
                     b.Property<int>("postal_code")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("updated_at")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<long>("updated_at")
+                        .HasColumnType("bigint");
 
                     b.HasKey("id");
+
+                    b.HasIndex("customer_id");
 
                     b.ToTable("Customer_Payment_Cards");
                 });
 
-            modelBuilder.Entity("ValidationWithMediatr_task.Models.Merchant", b =>
+            modelBuilder.Entity("ValidationWithMediatr_task.Domain.Models.MerchantD", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
@@ -107,8 +111,8 @@ namespace ValidationWithMediatr_task.Infrastructure.Presistence.Migrations
                     b.Property<string>("address")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("created_at")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<long>("created_at")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("image")
                         .HasColumnType("text");
@@ -119,23 +123,23 @@ namespace ValidationWithMediatr_task.Infrastructure.Presistence.Migrations
                     b.Property<double>("rating")
                         .HasColumnType("double precision");
 
-                    b.Property<DateTime>("update_at")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<long>("updated_at")
+                        .HasColumnType("bigint");
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
                     b.ToTable("Merchants");
                 });
 
-            modelBuilder.Entity("ValidationWithMediatr_task.Models.Product", b =>
+            modelBuilder.Entity("ValidationWithMediatr_task.Domain.Models.ProductD", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<DateTime>("created_at")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<long>("created_at")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("merchant_id")
                         .HasColumnType("integer");
@@ -146,12 +150,32 @@ namespace ValidationWithMediatr_task.Infrastructure.Presistence.Migrations
                     b.Property<int>("price")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("updated_at")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<long>("updated_at")
+                        .HasColumnType("bigint");
 
                     b.HasKey("id");
 
+                    b.HasIndex("merchant_id");
+
                     b.ToTable("Product");
+                });
+
+            modelBuilder.Entity("ValidationWithMediatr_task.Domain.Models.Customer_Payment_Card", b =>
+                {
+                    b.HasOne("ValidationWithMediatr_task.Domain.Models.CustomerD", "customer")
+                        .WithMany()
+                        .HasForeignKey("customer_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ValidationWithMediatr_task.Domain.Models.ProductD", b =>
+                {
+                    b.HasOne("ValidationWithMediatr_task.Domain.Models.MerchantD", "merchant")
+                        .WithMany()
+                        .HasForeignKey("merchant_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

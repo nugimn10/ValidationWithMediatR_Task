@@ -21,17 +21,11 @@ namespace ValidationWithMediatr_task.Application.UseCases.Customer.Queries.GetCu
 
             var data = await _context.Customer.ToListAsync();
 
-            var result = data.Select(e => new CustomerD
-            {
-                fullname = e.fullname,
-                username = e.username,
-            });
-
             return new GetCustomersDto
             {
                 Success = true,
                 Message = "Creator successfully retrieved",
-                Data = result.ToList()
+                Data = data
             };
 
         }

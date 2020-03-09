@@ -26,11 +26,11 @@ namespace ValidationWithMediatr_task.Presenter.Controllers
         {
             _mediatr = Mediator;
         }
-
+       
         [HttpGet]
-        public async Task<ActionResult<GetProductsQuery>> GetCustomer()
+        public async Task<ActionResult<GetProductsDto>> GetCustomer()
         {
-            var result = new GetProductsDto();
+            var result = new GetProductsQuery();
             return Ok(await _mediatr.Send(result));
         }
 

@@ -13,11 +13,13 @@ using ValidationWithMediatr_task.Application.UseCases.Merchant.Command.CreateMer
 using ValidationWithMediatr_task.Application.UseCases.Merchant.Command.DeleteMerchant;
 using ValidationWithMediatr_task.Application.UseCases.Merchant.Command.PutMerchant;
 using ValidationWithMediatr_task.Infrastructure.Presistence;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ValidationWithMediatr_task.Presenter.Controllers
 {
     [ApiController]
     [Route("merchant")]
+    [Authorize]
     public class MerchantController : ControllerBase
     {
         private IMediator _mediatr;

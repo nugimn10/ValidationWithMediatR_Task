@@ -11,8 +11,8 @@ namespace ValidationWithMediatr_task.Application.UseCases.Product.Command.PutPro
 {
     public class PutProductCommandHandler : IRequestHandler<PutProductCommand, PutProductCommandDto>
     {
-        private readonly IContext _context;
-        public PutProductCommandHandler (IContext context)
+        private readonly dbContext _context;
+        public PutProductCommandHandler (dbContext context)
         {
             _context = context;
         }

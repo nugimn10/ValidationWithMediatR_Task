@@ -52,9 +52,9 @@ namespace ValidationWithMediatr_task
             services.AddMvc().AddFluentValidation();
 
             services.AddMediatR(typeof(GetCustomerQueryHandler).GetTypeInfo().Assembly);
-            // services.AddMediatR(typeof(GetPaymentQueryHandler).GetTypeInfo().Assembly);
-            // services.AddMediatR(typeof(GetMerchantQueryHandler).GetTypeInfo().Assembly);
-            // services.AddMediatR(typeof(GetProdcutQueryHandler).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(GetPaymentQueryHandler).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(GetMerchantQueryHandler).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(GetProdcutQueryHandler).GetTypeInfo().Assembly);
 
             services.AddAuthentication(options => {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -71,10 +71,10 @@ namespace ValidationWithMediatr_task
                 };
             });
 
-            services.AddTransient<IValidator<CreateCustomerCommand>, CreateCustomerCommandValidator>();
-                // .AddTransient<IValidator<CreatePaymentCommand>, CreatePaymentCommandValidator>()
-                // .AddTransient<IValidator<CreateMerchantCommand>, CreateMerchantCommandValidator>()
-                // .AddTransient<IValidator<CreateProductCommand>, CreateProductCommandValidator>();
+            services.AddTransient<IValidator<CreateCustomerCommand>, CreateCustomerCommandValidator>()
+                .AddTransient<IValidator<CreatePaymentCommand>, CreatePaymentCommandValidator>()
+                .AddTransient<IValidator<CreateMerchantCommand>, CreateMerchantCommandValidator>()
+                .AddTransient<IValidator<CreateProductCommand>, CreateProductCommandValidator>();
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidator<,>));
 
